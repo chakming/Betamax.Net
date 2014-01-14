@@ -1,6 +1,8 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 10.00
-# Visual Studio 2008
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{25EF9237-B304-4B9C-8E40-8FF863AB8D63}"
+EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SampleInterface", "SampleInterface\SampleInterface.csproj", "{C3D402BD-A970-4C4E-AD99-02CC92EE5EE2}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SampleInterfaceImplementation", "SampleInterfaceImplementation\SampleInterfaceImplementation.csproj", "{8E491BCD-6925-4FD7-9E69-1E01EE481DDF}"
@@ -10,8 +12,6 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "mmSquare.Betamax.Interception.Tests", "Interception.Test\mmSquare.Betamax.Interception.Tests.csproj", "{5228D583-E5AA-4297-A433-8811DBBA8D88}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "mmSquare.Betamax.Integration.Tests", "Integration.Tests\mmSquare.Betamax.Integration.Tests.csproj", "{73060E0A-E4EE-4439-BD49-C96C98BE6EB0}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{25EF9237-B304-4B9C-8E40-8FF863AB8D63}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Unity.Integration.Tests", "Unity.Integration.Tests\Unity.Integration.Tests.csproj", "{7128D17D-6B4C-44C0-919C-B1E7993C7D7B}"
 EndProject
@@ -56,10 +56,10 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
+		{C3D402BD-A970-4C4E-AD99-02CC92EE5EE2} = {25EF9237-B304-4B9C-8E40-8FF863AB8D63}
 		{8E491BCD-6925-4FD7-9E69-1E01EE481DDF} = {25EF9237-B304-4B9C-8E40-8FF863AB8D63}
 		{5228D583-E5AA-4297-A433-8811DBBA8D88} = {25EF9237-B304-4B9C-8E40-8FF863AB8D63}
 		{73060E0A-E4EE-4439-BD49-C96C98BE6EB0} = {25EF9237-B304-4B9C-8E40-8FF863AB8D63}
-		{C3D402BD-A970-4C4E-AD99-02CC92EE5EE2} = {25EF9237-B304-4B9C-8E40-8FF863AB8D63}
 		{7128D17D-6B4C-44C0-919C-B1E7993C7D7B} = {25EF9237-B304-4B9C-8E40-8FF863AB8D63}
 	EndGlobalSection
 EndGlobal
