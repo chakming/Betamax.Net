@@ -1,11 +1,11 @@
 namespace SampleInterface.WcfStyle
 {
-	public class WidgetNameForRequest
-	{
-		public string VersionNumber
-		{
-			get;
-			set;
-		}
-	}
+    public class WidgetNameForRequest
+    {
+        public string VersionNumber
+        {
+            get;
+            set;
+        }
+    }
 }

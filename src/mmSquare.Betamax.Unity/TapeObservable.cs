@@ -1,8 +1,9 @@
 ﻿namespace mmSquare.Betamax.Unity
 {
-	interface TapeObservable
-	{
-		void RegisterObserver(TapeObserver observer);
-		void NotifyObservers();
-	}
+    internal interface TapeObservable
+    {
+        void RegisterObserver(TapeObserver observer);
+
+        void NotifyObservers();
+    }
 }

@@ -1,55 +1,53 @@
-﻿using System.IO;
-using Microsoft.Practices.Unity;
+﻿using Microsoft.Practices.Unity;
+using mmSquare.Betamax;
 using NUnit.Framework;
 using SampleInterface.WcfStyle;
-using mmSquare.Betamax;
+using System.IO;
 
 namespace Integration.Tests
 {
-	
-	[TestFixture]
-	public class PlaybackImplementationTests
-	{
+    [TestFixture]
+    public class PlaybackImplementationTests
+    {
+        private class ProxyFactory
+        {
+            public WidgetService CreateWidgetServiceInstance()
+            {
+                return new Player().Play<WidgetService>();
+            }
+        }
 
-		class ProxyFactory
-		{
-			public WidgetService CreateWidgetServiceInstance()
-			{
-				return new Player().Play<WidgetService>();
-			}
-		}
+        [Test]
+        public void ShouldReadDataFromRecordedInfo()
+        {
+            Setup();
 
-		[Test]
-		public void ShouldReadDataFromRecordedInfo()
-		{
-			Setup();
+            var container = new UnityContainer();
+            container.RegisterType<WidgetService>(new InjectionFactory(c => new ProxyFactory().CreateWidgetServiceInstance()));
 
-			var container = new UnityContainer();
-			container.RegisterType<WidgetService>(new InjectionFactory(c => new ProxyFactory().CreateWidgetServiceInstance()));
+            var service = container.Resolve<WidgetService>();
 
-			var service = container.Resolve<WidgetService>();
+            Assert.That(service.GetWidgetName().WidgetName, Is.EqualTo("Wcf Widget"));
 
-			Assert.That(service.GetWidgetName().WidgetName, Is.EqualTo("Wcf Widget"));
+            TearDown();
+        }
 
-			TearDown();
-		}
+        private void TearDown()
+        {
+            Directory.Delete("RecordedCalls", true);
+        }
 
-		private void TearDown()
-		{
-			Directory.Delete("RecordedCalls", true);
-		}
-
-		private void Setup()
-		{
-			const string tapeLocation = @"RecordedCalls\SampleInterface.WcfStyle.WidgetService\GetWidgetName";
-			Directory.CreateDirectory(tapeLocation);
-			var writer = File.CreateText(Path.Combine(tapeLocation, "0000000d39ac355b-response.xml"));
-			using (writer)
-			{
-				writer.WriteLine(
-					"<WidgetNameResponse z:Id=\"1\" z:Type=\"SampleInterface.WcfStyle.WidgetNameResponse\" z:Assembly=\"SampleInterface, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null\" xmlns=\"http://schemas.datacontract.org/2004/07/SampleInterface.WcfStyle\" xmlns:i=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:z=\"http://schemas.microsoft.com/2003/10/Serialization/\"><WidgetName z:Id=\"2\">Wcf Widget</WidgetName></WidgetNameResponse>");
-				writer.Close();
-			}
-		}
-	}
+        private void Setup()
+        {
+            const string tapeLocation = @"RecordedCalls\SampleInterface.WcfStyle.WidgetService\GetWidgetName";
+            Directory.CreateDirectory(tapeLocation);
+            var writer = File.CreateText(Path.Combine(tapeLocation, "0000000d39ac355b-response.xml"));
+            using (writer)
+            {
+                writer.WriteLine(
+                    "<WidgetNameResponse z:Id=\"1\" z:Type=\"SampleInterface.WcfStyle.WidgetNameResponse\" z:Assembly=\"SampleInterface, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null\" xmlns=\"http://schemas.datacontract.org/2004/07/SampleInterface.WcfStyle\" xmlns:i=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:z=\"http://schemas.microsoft.com/2003/10/Serialization/\"><WidgetName z:Id=\"2\">Wcf Widget</WidgetName></WidgetNameResponse>");
+                writer.Close();
+            }
+        }
+    }
 }

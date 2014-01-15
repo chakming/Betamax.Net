@@ -7,17 +7,17 @@ namespace SampleInterfaceImplementation
 		public WidgetNameResponse GetWidgetName()
 		{
 			return new WidgetNameResponse
-			       	{
-                        WidgetName = "Wcf Widget"
-			       	};
+					{
+						WidgetName = "Wcf Widget"
+					};
 		}
 
 		public WidgetNameForResponse GetWidgetNameFor(WidgetNameForRequest request)
 		{
 			return new WidgetNameForResponse
-			       	{
-                        WidgetName = string.Format("Wcf Widget versioned {0}",request.VersionNumber)
-			       	};
+					{
+						WidgetName = string.Format("Wcf Widget versioned {0}", request.VersionNumber)
+					};
 		}
 	}
 }
