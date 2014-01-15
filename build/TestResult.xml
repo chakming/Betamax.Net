@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!--This file represents the results of running a test suite-->
+<test-results name="C:\git\Betamax.Net\src\Unity.Integration.Tests\bin\Release\Unity.Integration.Tests.dll" total="8" errors="0" failures="0" not-run="0" inconclusive="0" ignored="0" skipped="0" invalid="0" date="2014-01-15" time="02:42:38">
+  <environment nunit-version="2.6.3.13283" clr-version="2.0.50727.5472" os-version="Microsoft Windows NT 6.1.7601 Service Pack 1" platform="Win32NT" cwd="C:\git\Betamax.Net\build" machine-name="C02LL2F6FD58" user="mcochran" user-domain="C02LL2F6FD58" />
+  <culture-info current-culture="en-US" current-uiculture="en-US" />
+  <test-suite type="Assembly" name="C:\git\Betamax.Net\src\Unity.Integration.Tests\bin\Release\Unity.Integration.Tests.dll" executed="True" result="Success" success="True" time="1.150" asserts="0">
+    <results>
+      <test-suite type="Namespace" name="Unity" executed="True" result="Success" success="True" time="1.069" asserts="0">
+        <results>
+          <test-suite type="Namespace" name="Integration" executed="True" result="Success" success="True" time="1.051" asserts="0">
+            <results>
+              <test-suite type="Namespace" name="Tests" executed="True" result="Success" success="True" time="1.068" asserts="0">
+                <results>
+                  <test-suite type="Namespace" name="Configuration" executed="True" result="Success" success="True" time="0.581" asserts="0">
+                    <results>
+                      <test-suite type="TestFixture" name="BetamaxConfigurationExtensionsTests" executed="True" result="Success" success="True" time="0.675" asserts="0">
+                        <results>
+                          <test-case name="Unity.Integration.Tests.Configuration.BetamaxConfigurationExtensionsTests.Should_Only_Record_For_Types_Declared_In_Config_File" executed="True" result="Success" success="True" time="0.546" asserts="2" />
+                          <test-case name="Unity.Integration.Tests.Configuration.BetamaxConfigurationExtensionsTests.Should_Playback_From_Configured_Tape_Location" executed="True" result="Success" success="True" time="0.076" asserts="1" />
+                        </results>
+                      </test-suite>
+                    </results>
+                  </test-suite>
+                  <test-suite type="TestFixture" name="ContainerTests" executed="True" result="Success" success="True" time="-0.005" asserts="0">
+                    <results>
+                      <test-case name="Unity.Integration.Tests.ContainerTests.ShouldInterceptResolutionAndDecorateWithRecordingProxy" executed="True" result="Success" success="True" time="0.008" asserts="1" />
+                      <test-case name="Unity.Integration.Tests.ContainerTests.ShouldResolveImplementingTypeWithouthExtension" executed="True" result="Success" success="True" time="0.075" asserts="1" />
+                    </results>
+                  </test-suite>
+                  <test-suite type="TestFixture" name="UnityInterceptionTests" executed="True" result="Success" success="True" time="0.485" asserts="0">
+                    <results>
+                      <test-case name="Unity.Integration.Tests.UnityInterceptionTests.ShouldInterceptServiceCalls" executed="True" result="Success" success="True" time="0.360" asserts="4" />
+                      <test-case name="Unity.Integration.Tests.UnityInterceptionTests.ShouldInterceptSimpleServiceCalls" executed="True" result="Success" success="True" time="-0.049" asserts="4" />
+                    </results>
+                  </test-suite>
+                  <test-suite type="TestFixture" name="UnityTests" executed="True" result="Success" success="True" time="0.027" asserts="0">
+                    <results>
+                      <test-case name="Unity.Integration.Tests.UnityTests.Should_Record_All_Types_If_None_Explicitly_Declared" executed="True" result="Success" success="True" time="0.014" asserts="2" />
+                      <test-case name="Unity.Integration.Tests.UnityTests.Should_Record_Only_Explicitly_Declared_Types" executed="True" result="Success" success="True" time="0.009" asserts="2" />
+                    </results>
+                  </test-suite>
+                </results>
+              </test-suite>
+            </results>
+          </test-suite>
+        </results>
+      </test-suite>
+    </results>
+  </test-suite>
+</test-results>

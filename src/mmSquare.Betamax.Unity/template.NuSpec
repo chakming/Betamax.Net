@@ -1,0 +1,26 @@
+﻿<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+  <metadata>
+    <id>mmSquare.Betamax.Unity</id>
+    <title>Betamax.Net Unity</title>
+    <version>1.0.0</version>
+    <authors>Medidata</authors>
+    <owners>Medidata</owners>
+    <licenseUrl>https://todo</licenseUrl>
+    <projectUrl>https://github.com/matthew-cochran/Betamax.Net/</projectUrl>
+    <iconUrl>https://github.com/matthew-cochran/Betamax.Net/</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Betamax.Net Unity IOC</description>
+    <summary>Unity IOC for Betamax.</summary>
+    <language>en-US</language>
+    <dependencies>
+      <dependency id="Unity" version="3.0.1304.1" />
+      <dependency id="Unity.Interception" version="3.0.1304.0" />
+      <dependency id="UnityConfiguration" version="1.4.1" />      
+      <dependency id="mmSquare.Betamax" version="1.0.0" />
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="bin\||CONFIG||\mmSquare.Betamax.Unity.*" target="lib\net45" />
+  </files>
+</package>
