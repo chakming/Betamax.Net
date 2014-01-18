@@ -6,18 +6,20 @@ using System.Runtime.Serialization;
 
 namespace mmSquare.Betamax
 {
-    public class FileTape : Tape, TapeObserver
+    public class OrderedFileTape : Tape, TapeObserver
     {
         private string _tapeFolder;
 
+        private long _position;
+
         private readonly XmlObjectSerializer _serializer;
 
-        public FileTape()
+        public OrderedFileTape()
             : this(TapeRootPath)
         {
         }
 
-        public FileTape(string tapeFolder)
+        public OrderedFileTape(string tapeFolder)
         {
             if (string.IsNullOrEmpty(tapeFolder))
                 throw new ArgumentNullException("tapeFolder");
@@ -25,6 +27,8 @@ namespace mmSquare.Betamax
             _tapeFolder = tapeFolder;
 
             _serializer = new NetDataContractSerializer();
+
+            _position = long.MinValue;
         }
 
         private const string TapeRootPath = @"RecordedCalls";
@@ -99,14 +103,24 @@ namespace mmSquare.Betamax
                 throw new Exception("Expected tape location does not exist: " + di.FullName);
             }
 
-            var files = di.GetFiles(string.Format("*-{0}.xml", ResponseFileTypeName));
-            var file = files.FirstOrDefault();
-            if (file != null)
+            var files = from file in di.GetFiles(string.Format("*-{0}.xml", ResponseFileTypeName)) 
+                        select new {  f = file, stamp = this.GetTicks(file.Name) };
+
+            var filteredFiles = from file in files
+                                orderby file.stamp 
+                                where file.stamp > _position
+                                select file;
+                         
+            var selectedFile = filteredFiles.FirstOrDefault();
+
+            _position = selectedFile.stamp;
+
+            if (selectedFile != null)
             {
-                return DeserialiseObject(file.OpenRead());
+                return DeserialiseObject(selectedFile.f.OpenRead());
             }
 
-            throw new Exception(string.Format("Unable to find a saved response on tape at {0}", di.FullName));
+            throw new Exception(string.Format("Unable to find a saved response on tape at {0} at the current position", di.FullName));
         }
 
         public TapeToken GetToken()
@@ -118,14 +132,22 @@ namespace mmSquare.Betamax
             };
         }
 
+        private long GetTicks(String fileName)
+        {
+             var x16 = fileName.Substring(0,  fileName.IndexOf('-'));
+             var result = Int64.Parse(x16, System.Globalization.NumberStyles.HexNumber);
+             return result;
+        }
+
         public void NotifyEject(string newTapeLocation)
         {
             _tapeFolder = newTapeLocation;
         }
 
+
         public void Erase()
         {
-            if(Directory.Exists(_tapeFolder))
+            if (Directory.Exists(_tapeFolder))
                 Directory.Delete(_tapeFolder, true);
         }
     }

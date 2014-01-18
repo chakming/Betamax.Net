@@ -71,6 +71,7 @@
     <Reference Include="System.XML" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="OrderedFileTape.cs" />
     <Compile Include="FileTape.cs" />
     <Compile Include="Recorder.cs" />
     <Compile Include="Tape.cs" />

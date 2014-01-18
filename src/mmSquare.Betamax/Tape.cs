@@ -15,5 +15,7 @@ namespace mmSquare.Betamax
         object Playback(Type recordedType, string methodName);
 
         TapeToken GetToken();
+
+        void Erase();
     }
 }
