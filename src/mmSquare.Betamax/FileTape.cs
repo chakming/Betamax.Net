@@ -99,7 +99,7 @@ namespace mmSquare.Betamax
                 throw new Exception("Expected tape location does not exist: " + di.FullName);
             }
 
-            var file = GetFilesByCount(0, di);
+            var file = GetNthFilesOrderedByCreateTime(0, di);
             if (file != null)
             {
                 return DeserialiseObject(file.OpenRead());
@@ -118,7 +118,7 @@ namespace mmSquare.Betamax
                 throw new Exception("Expected tape location does not exist: " + di.FullName);
             }
 
-            var file = GetFilesByCount(count, di);
+            var file = GetNthFilesOrderedByCreateTime(count, di);
             if (file != null)
             {
                 return DeserialiseObject(file.OpenRead());
@@ -127,7 +127,7 @@ namespace mmSquare.Betamax
             throw new Exception(string.Format("Unable to find a saved response on tape at {0}", di.FullName));
         }
 
-        private static FileInfo GetFilesByCount(int count, DirectoryInfo di)
+        private static FileInfo GetNthFilesOrderedByCreateTime(int count, DirectoryInfo di)
         {
             var files = di.GetFiles(string.Format("*-{0}.xml", ResponseFileTypeName));
             if (files.Count() <= count)
@@ -137,8 +137,7 @@ namespace mmSquare.Betamax
             }
 
             var orderedFiles = files.OrderBy(info => info.CreationTime).ToList();
-            var file = orderedFiles[count];
-            return file;
+            return orderedFiles[count];
         }
 
         public TapeToken GetToken()
