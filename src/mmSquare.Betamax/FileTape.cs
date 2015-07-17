@@ -99,14 +99,46 @@ namespace mmSquare.Betamax
                 throw new Exception("Expected tape location does not exist: " + di.FullName);
             }
 
-            var files = di.GetFiles(string.Format("*-{0}.xml", ResponseFileTypeName));
-            var file = files.FirstOrDefault();
+            var file = GetFilesByCount(0, di);
             if (file != null)
             {
                 return DeserialiseObject(file.OpenRead());
             }
 
             throw new Exception(string.Format("Unable to find a saved response on tape at {0}", di.FullName));
+        }
+
+        public object Playback(Type recordedType, string methodName, int count)
+        {
+            var path = GetPath(recordedType, methodName, false);
+            var di = new DirectoryInfo(path);
+
+            if (!di.Exists)
+            {
+                throw new Exception("Expected tape location does not exist: " + di.FullName);
+            }
+
+            var file = GetFilesByCount(count, di);
+            if (file != null)
+            {
+                return DeserialiseObject(file.OpenRead());
+            }
+
+            throw new Exception(string.Format("Unable to find a saved response on tape at {0}", di.FullName));
+        }
+
+        private static FileInfo GetFilesByCount(int count, DirectoryInfo di)
+        {
+            var files = di.GetFiles(string.Format("*-{0}.xml", ResponseFileTypeName));
+            if (files.Count() <= count)
+            {
+                throw new Exception(string.Format("Unable to find a saved response on tape at {0} for count {1}", di.FullName,
+                    count));
+            }
+
+            var orderedFiles = files.OrderBy(info => info.CreationTime).ToList();
+            var file = orderedFiles[count];
+            return file;
         }
 
         public TapeToken GetToken()

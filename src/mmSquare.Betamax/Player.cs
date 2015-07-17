@@ -33,15 +33,18 @@ namespace mmSquare.Betamax
         internal class MethodInterceptor : IInterceptor
         {
             private readonly Tape _tape;
+            private int _count;
 
             public MethodInterceptor(Tape tape)
             {
                 _tape = tape;
+                _count = 0;
             }
 
             public void Intercept(IInvocation invocation)
             {
-                invocation.ReturnValue = _tape.Playback(invocation.Method.ReflectedType, invocation.Method.Name);
+                invocation.ReturnValue = _tape.Playback(invocation.Method.ReflectedType, invocation.Method.Name, _count);
+                _count++;
             }
         }
     }
